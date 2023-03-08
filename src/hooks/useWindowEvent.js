@@ -1,11 +1,11 @@
 import React from "react";
 
-const useWindowEvent = (eventType, handleOnKeyDown) => {
+const useWindowEvent = (eventType, callback) => {
   React.useEffect(() => {
-    window.addEventListener(eventType, handleOnKeyDown);
+    window.addEventListener(eventType, callback);
 
     return () => {
-      window.removeEventListener(eventType, handleOnKeyDown);
+      window.removeEventListener(eventType, callback);
     };
   }, []);
 };
