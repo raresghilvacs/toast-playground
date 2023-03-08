@@ -6,11 +6,15 @@ export const ToastContext = React.createContext();
 function ToastProvider({ children }) {
   const [toastsArray, setToastsArray] = React.useState([]);
 
-  useWindowEvent("keydown", (event) => {
+  const handleEvent = React.useCallback((event) => {
     if (event.key === "Escape") {
       setToastsArray([]);
     }
   });
+
+  const event = React.useMemo(() => "keydown", []);
+
+  useWindowEvent(event, handleEvent);
 
   const dimsissToast = (id) => {
     const newToastsArray = toastsArray.filter((toast) => toast.id !== id);
