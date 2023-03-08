@@ -35,10 +35,7 @@ function ToastPlayground() {
           <ToastShelf toasts={toastsArray} onDismiss={dimsissToast} />
         )}
 
-        <form
-          onSubmit={(e) => handleAddToast(e)}
-          className={styles.controlsWrapper}
-        >
+        <form onSubmit={handleAddToast} className={styles.controlsWrapper}>
           <ToastTextarea
             className={styles.row}
             labelValue="Message"

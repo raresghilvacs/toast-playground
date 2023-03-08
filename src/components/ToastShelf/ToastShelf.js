@@ -13,10 +13,7 @@ function ToastShelf({ toasts, onDismiss }) {
       {toasts.map((toast) => {
         return (
           <li className={styles.toastWrapper} key={toast.id}>
-            <Toast
-              variant={toast.variant}
-              onDismiss={() => onDismiss(toast.id)}
-            >
+            <Toast id={toast.id} variant={toast.variant} onDismiss={onDismiss}>
               {toast.message}
             </Toast>
           </li>
