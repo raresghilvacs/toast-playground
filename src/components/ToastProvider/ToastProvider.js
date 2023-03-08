@@ -1,20 +1,23 @@
 import React from "react";
-import { VARIANT_OPTIONS } from "../ToastRadioInput/ToastRadioInput";
+import useWindowEvent from "../../hooks/useWindowEvent";
 
 export const ToastContext = React.createContext();
 
 function ToastProvider({ children }) {
   const [toastsArray, setToastsArray] = React.useState([]);
 
+  useWindowEvent("keydown", (event) => {
+    if (event.key === "Escape") {
+      setToastsArray([]);
+    }
+  });
+
   const dimsissToast = (id) => {
-    console.log("here");
     const newToastsArray = toastsArray.filter((toast) => toast.id !== id);
     setToastsArray(newToastsArray);
   };
 
   const createToast = (message, variant) => {
-    console.log(message, variant);
-    console.log(toastsArray);
     const newToastsArray = [
       ...toastsArray,
       {

@@ -17,7 +17,6 @@ function ToastPlayground() {
     React.useContext(ToastContext);
 
   const handleAddToast = (e) => {
-    console.log("si here");
     e.preventDefault();
     createToast(textareaValue, inputVariant);
     setInputVariant(VARIANT_OPTIONS[0]);
@@ -31,12 +30,15 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <form onSubmit={(e) => handleAddToast(e)}>
+      <div>
         {toastsArray.length > 0 && (
           <ToastShelf toasts={toastsArray} onDismiss={dimsissToast} />
         )}
 
-        <div className={styles.controlsWrapper}>
+        <form
+          onSubmit={(e) => handleAddToast(e)}
+          className={styles.controlsWrapper}
+        >
           <ToastTextarea
             className={styles.row}
             labelValue="Message"
@@ -59,8 +61,8 @@ function ToastPlayground() {
               <Button>Pop Toast!</Button>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
