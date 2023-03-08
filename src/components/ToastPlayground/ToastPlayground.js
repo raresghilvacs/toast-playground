@@ -5,6 +5,7 @@ import ToastTextarea from "../ToastTextarea/ToastTextarea";
 import ToastRadioInput, {
   VARIANT_OPTIONS,
 } from "../ToastRadioInput/ToastRadioInput";
+import { ToastContext } from "../ToastProvider/ToastProvider";
 
 import styles from "./ToastPlayground.module.css";
 import ToastShelf from "../ToastShelf/ToastShelf";
@@ -12,24 +13,13 @@ import ToastShelf from "../ToastShelf/ToastShelf";
 function ToastPlayground() {
   const [textareaValue, setTextareaValue] = React.useState("");
   const [inputVariant, setInputVariant] = React.useState(VARIANT_OPTIONS[0]);
-  const [toastsArray, setToastsArray] = React.useState([]);
-
-  const handleDimsissToast = (id) => {
-    const newToastsArray = toastsArray.filter((toast) => toast.id !== id);
-    setToastsArray(newToastsArray);
-  };
+  const { toastsArray, createToast, dimsissToast } =
+    React.useContext(ToastContext);
 
   const handleAddToast = (e) => {
+    console.log("si here");
     e.preventDefault();
-    const newToastsArray = [
-      ...toastsArray,
-      {
-        id: crypto.randomUUID(),
-        variant: inputVariant,
-        message: textareaValue,
-      },
-    ];
-    setToastsArray(newToastsArray);
+    createToast(textareaValue, inputVariant);
     setInputVariant(VARIANT_OPTIONS[0]);
     setTextareaValue("");
   };
@@ -43,7 +33,7 @@ function ToastPlayground() {
 
       <form onSubmit={(e) => handleAddToast(e)}>
         {toastsArray.length > 0 && (
-          <ToastShelf toasts={toastsArray} onDismiss={handleDimsissToast} />
+          <ToastShelf toasts={toastsArray} onDismiss={dimsissToast} />
         )}
 
         <div className={styles.controlsWrapper}>
