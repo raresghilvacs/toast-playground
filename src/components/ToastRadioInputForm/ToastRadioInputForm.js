@@ -1,7 +1,7 @@
 import React from "react";
 import ToastInput from "../ToastInput/ToastInput";
 
-const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
+export const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastRadioInputForm({ className = "", checked, onChange }) {
   return (

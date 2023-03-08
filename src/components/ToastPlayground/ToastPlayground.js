@@ -1,16 +1,18 @@
 import React from "react";
 
 import Button from "../Button";
+import Toast from "../Toast/Toast";
 import ToastTextarea from "../ToastTextarea/ToastTextarea";
-import ToastRadioInputForm from "../ToastRadioInputForm/ToastRadioInputForm";
+import ToastRadioInputForm, {
+  VARIANT_OPTIONS,
+} from "../ToastRadioInputForm/ToastRadioInputForm";
 
 import styles from "./ToastPlayground.module.css";
 
-const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
-
 function ToastPlayground() {
   const [textareaValue, setTextareaValue] = React.useState("");
-  const [inputVariant, setInputVariant] = React.useState();
+  const [inputVariant, setInputVariant] = React.useState(VARIANT_OPTIONS[0]);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <div className={styles.wrapper}>
@@ -18,6 +20,12 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      {isOpen && (
+        <Toast variant={inputVariant} onDismiss={() => setIsOpen(false)}>
+          {textareaValue}
+        </Toast>
+      )}
 
       <div className={styles.controlsWrapper}>
         <ToastTextarea
@@ -39,7 +47,7 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => setIsOpen(true)}>Pop Toast!</Button>
           </div>
         </div>
       </div>
