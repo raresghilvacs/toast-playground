@@ -3,9 +3,9 @@ import ToastInput from "../ToastInput/ToastInput";
 
 export const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
-function ToastRadioInputForm({ className = "", checked, onChange }) {
+function ToastRadioInput({ className = "", selectedVariant, onChange }) {
   return (
-    <form className={className}>
+    <div className={className}>
       {VARIANT_OPTIONS.map((option) => {
         return (
           <ToastInput
@@ -14,13 +14,13 @@ function ToastRadioInputForm({ className = "", checked, onChange }) {
             id={`variant-${option}`}
             labelValue={option}
             value={option}
-            checked={checked === option}
+            checked={selectedVariant === option}
             onChange={onChange}
           />
         );
       })}
-    </form>
+    </div>
   );
 }
 
-export default ToastRadioInputForm;
+export default ToastRadioInput;
